@@ -1,17 +1,20 @@
 const router = require('express').Router();
 const {} = require('../../controllers/thought-controller');
 
-// Set up GET all and POST at /api/pizzas
 router
-  .route('/')
+  .route('/thoughts')
   .get()
   .post();
 
-// Set up GET one, PUT, and DELETE at /api/pizzas/:id
-router
-  .route('/:id')
+  router
+  .route('/thoughts/:id')
   .get()
   .put()
+  .post();
+
+router
+  .route('/thoughts/:id/reactions')
+  .post()
   .delete();
 
 module.exports = router;
