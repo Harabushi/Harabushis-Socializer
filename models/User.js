@@ -35,8 +35,13 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.virtual('friendCount').get(()=>{
+// arrow function does not seem to work for this
+UserSchema.virtual('friendCount').get(function() {
   return this.friends.length;
+});
+
+UserSchema.virtual('thoughtCount').get(function() {
+  return this.thoughts.length;
 });
 
 const User = model('User', UserSchema);
