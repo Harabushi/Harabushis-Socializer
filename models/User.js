@@ -1,5 +1,19 @@
 const { Schema, model } = require('mongoose');
 
+// did not end up needing
+// const FriendSchema = new Schema(
+//   {
+//     friendId: {
+//       type: Schema.Types.ObjectId,
+//       default: () => new Types.ObjectId()
+//     },
+//     createdAt: {
+//       type: Date,
+//       default: Date.now
+//     }
+//   }
+// );
+
 const UserSchema = new Schema(
   {
     username: {
@@ -35,7 +49,7 @@ const UserSchema = new Schema(
   }
 );
 
-// arrow function does not seem to work for this
+// arrow function does not seem to work for these
 UserSchema.virtual('friendCount').get(function() {
   return this.friends.length;
 });

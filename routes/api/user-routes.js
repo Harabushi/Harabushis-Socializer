@@ -11,11 +11,11 @@ router
   .route('/:id')
   .get(getUserById)
   .put(updateUser)
-  .delete(deleteUser);
+  .delete(deleteUser)
+  .post(addFriend);
 
 router
-  .route('/:id/:friendId')
-  .post(addFriend)
+  .route('/:id/:friendId') 
   .delete(removeFriend);
 
 module.exports = router;

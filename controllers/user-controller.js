@@ -8,6 +8,10 @@ const userController = {
         path: 'thoughts',
         select: '-__v'
       })
+      .populate({
+        path: 'friends',
+        select: '-__v'
+      })
       .select('-__v')
       .sort({ _id: -1 })
       .then(dbUserData => res.json(dbUserData))
@@ -68,10 +72,10 @@ const userController = {
   },
 
   addFriend({ params, body }, res) {
-    Thought.findOneAndUpdate(
-      { _id: params.thoughtId },
-      { $push: { friendss: body } },
-      { new: true, runValidators: true }
+    User.findOneAndUpdate(
+      { _id: params.id },
+      { $push: { friends: body.friendId } },
+      { new: true }
     )
       .then(dbUserData => {
         if (!dbUserData) {
@@ -84,9 +88,9 @@ const userController = {
   },
 
   removeFriend({ params }, res) {
-    Thought.findOneAndUpdate(
-      { _id: params.thoughtId },
-      { $pull: { friends: { friendId: params.friendId } } },
+    User.findOneAndUpdate(
+      { _id: params.id },
+      { $pull: { friends: params.friendId } },
       { new: true }
     )
       .then(dbUserData => res.json(dbUserData))
